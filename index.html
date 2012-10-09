@@ -1,1 +1,745 @@
-test
+<!DOCTYPE html>
+<!--
+  Copyright 2011 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Chrome DevRel Team (chrome-devrel@googlegroups.com)
+                 Alex Russell (slightlyoff@chromium.org)
+                 Brad Neuberg
+-->
+<html manifest="cache.appcache">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
+    <title>Corba HTML5 Presentation</title>
+    <!--<link href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet" type="text/css" />-->
+    <link href="css/fonts.css" rel="stylesheet" type="text/css" />
+    <link id="prettify-link" href="src/prettify/prettify.css" rel="stylesheet" disabled />
+    <link href="css/moon.css" class="theme" rel="stylesheet" />
+    <link href="css/sand.css" class="theme" rel="stylesheet" />
+    <link href="css/sea_wave.css" class="theme" rel="stylesheet" />
+    <link href="css/default.css" class="theme" rel="stylesheet" media="screen"  />
+    <link href="css/common.css" rel="stylesheet" media="screen" />
+  </head>
+  <body>
+    <nav id="helpers">
+      <button title="Previous slide" id="nav-prev" class="nav-prev">⇽</button> 
+      <button title="Jump to a random slide" id="slide-no">5</button> 
+      <button title="Next slide" id="nav-next" class="nav-next">⇾</button>
+      <menu>
+        <button type="checkbox" data-command="toc" title="Table of Contents" class="toc">TOC</button>
+        <!-- <button type="checkbox" data-command="resources" title="View Related Resources">☆</button> -->
+        <button type="checkbox" data-command="notes" title="View Slide Notes">✏</button>
+        <button type="checkbox" data-command="source" title="View slide source">↻</button>
+        <button type="checkbox" data-command="help" title="View Help">?</button>
+      </menu>
+    </nav>
+    <div class="presentation">
+      <div id="presentation-counter">Cargando...</div>
+      <div class="slides">
+        <div class="slide" id="landing-slide">
+          <style>
+            #landing-slide p {
+              font-size: 35px;
+            }
+            p#disclaimer-message {
+              font-size: 20px;
+            }
+          </style>
+          <section class="middle">
+            <p>Esta presentación es una web realizada en HTML5</p>
+            <p>Presione <span id="left-init-key" class="key">&rarr;</span> para avanzar.</p>
+          </section>
+          <aside class="note">
+            <section>
+              Welcome! (This field is for presenter notes and commentary.)
+            </section>
+          </aside> 
+        </div>
+
+        <div class="slide" id="controls-slide">
+          <header>Controles</header>
+          <style>
+            #controls-slide li, #controls-slide p {
+              font-size: 32px;
+            }
+            #controls-slide .key {
+              bottom: 2px;
+            }
+          </style>
+          <section>
+            <ul>
+              <li><span class="key">&larr;</span> y <span class="key">&rarr;</span> para moverse.</li>
+              <li><span class="key">Ctrl/Command</span> y <span class="key">+</span> o <span class="key">-</span> Aumenta o disminuye el zoom.</li>
+              <li><span class="key">S</span> para ver el código fuente de la página.</li>
+              <li><span class="key">T</span> para cambiar el  theme.</li>
+              <li><span class="key">H</span> para cambiar el color de la sintaxis.</li>
+              <li><span class="key">N</span> para ver las notas de la presentación.</li>
+              <li><span class="key">3</span> para cambiar a efectos 3D.</li>
+              <li><span class="key">0</span> para esta ayuda.</li>
+            </ul>
+          </section>
+        </div>
+
+        <div class="slide" id="group-people">
+          <header><img src="dns_img/logo-uai1.png" alt="UAI"></header>
+           <style>
+            #group-people li {
+              font-size: 32px;
+            }
+          </style>
+          <section class="middle">
+            <ul>
+              <li>Profesor: Santiago Sabato</li>
+              <li>Materia: Modelos</li>
+              <li>Alumnos:
+                 <ul>
+                  <li>Decchi, Alejandro</li>
+                  <li>Viola Villanueva, Javier</li>
+                 </ul>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <div class="slide" id="title-slide">
+          <style>
+            #title-slide h1, #title-slide h2 {
+              color: black;
+            }
+            #title-slide h1 {
+              letter-spacing: -2px;
+              font-size: 96px;
+            }
+            #title-slide h2 {
+              margin-top: -5px;
+              font-size: 40px;
+              letter-spacing: -1px;
+            }
+          </style>
+          <section class="middle">
+            <hgroup>
+              <h1>
+               	Corba
+              </h1>
+              <h2>
+                Common Object Request Broker Architecture
+              </h2>
+            </hgroup>
+            
+          </section>
+        </div>
+       <div class="slide" id="table-of-contents">
+          <header><h1>Hoy vamos a hablar de</h1></header>
+          <style>
+            #toc-list > li {
+              font-size: 26px;
+              line-height: 33px;
+              opacity: 0.85;
+            }
+            #toc-list > li:hover {
+              opacity: 1;
+            }
+            #toc-list a {
+              border-bottom: 0;
+            }
+            #toc-list a:hover{
+              border-bottom: 2px solid #3f3f3f;
+            }
+            #toc-list img {
+              vertical-align: middle;
+              margin-left: 15px;
+            }
+          </style>
+          <section class="toc" data-build>
+        	  <ul id="toc-list">              
+            </ul>
+          </section>
+        </div>
+
+      
+  
+      <!-- primer tema -->
+      <div class="slide transitionSlide" id="CORBA">
+          <section class="middle">
+            <h2>Object Request Broker</h2>
+            <p>Introducci&oacute;n</p>
+          </section>
+      </div>    
+
+      <div class="slide" id="ORB_Carac">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        </style>
+        <header class="title-right">Caracter&iacute;sticas</header>
+        <section class="middle" data-build>          
+          <li class="listaDerecha">Es un sistema autodescriptivo</li>
+          <li class="listaDerecha">ORB ofrece la conectividad en un sistema CORBA</li>   
+          <li class="listaDerecha">Canal de comunicaci&oacute;n a trav&eacute;s del cual los objetos solicitan servicios con independencia de su ubicaci&oacute;n f&eacute;sica</li>
+          <li class="listaDerecha">Permite la invocación est&aacute;tica y din&aacute;mica </li>
+          <li class="listaDerecha">Permite una comunicaci&oacute;n transparente cuando un cliente env&iacute;a una solicitud a un objeto remoto</li>
+
+        </section>
+      </div>
+
+      <div class="slide transitionSlide" id="Arquitectura">
+          <section class="middle">
+            <h2>Arquitectura</h2>
+            <p>Visión General</p>
+          </section>
+      </div>    
+
+      <div class="slide " id="Arq">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .img_wrapper{
+          border-radius: 5px;
+          border: 2px solid #ccc;
+          width: 600px;
+          margin:auto;
+          padding: 10px;
+          box-shadow: 10px 10px 5px #888;
+          background-color: white;  
+        }
+
+        
+        </style>
+        <header class="title-right"> Arquitectura</header>
+        
+        <section class="middle" data-build>
+          
+            <div class="img_wrapper">
+              <img src="corba_img/corba_arq.gif" />
+            </div>
+                      
+        </section>
+      </div>
+
+      <div class="slide" id="Arq_Detalle">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right">Detalle de la Arquitectura (cliente)</header>
+        <section class="middle" data-build>
+   
+            <li class="listaDerecha"><b>IDL Stubs:</b> Funciones generadas desde la interfaz IDL para “enlazarlas” a los clientes Provee una interfaz de invocación estática</li>
+            <li class="listaDerecha"><b>Dynamic Invocation Interface (DII): </b> Permite especificar y construir requerimientos en tiempo de ejecuci&oacute;n. Operaciones: create_request, invoke, send, get_response </li>
+            
+        </section>
+      </div>
+
+
+      <div class="slide" id="Arq_Detalle1">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right">Detalle de la Arquitectura (Servidor)</header>
+        <section class="middle" data-build>
+          
+
+ 
+
+            <li class="listaDerecha"><b>IDL Skeleton:</b> Funciones generadas desde la interfaz IDL para “enlazarlas” a las implementaciones de objetos </li>
+            <li class="listaDerecha"><b>Dynamic Skeleton Interface (DSI):</b> Análogo al DII del lado de la implementación de objetos. 
+            Puede recibir invocaciones estáticas o dinámicas desde los clientes </li>
+        <!--     <li class="listaDerecha"></li>
+            <li class="listaDerecha"></li>
+            <li class="listaDerecha"></li>
+        -->
+            
+        </section>
+      </div>
+
+      <div class="slide" id="Arq_Detalle2">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right">Detalle de la Arquitectura </header>
+        <section class="middle" data-build>
+          <li class="listaDerecha"><b>ORB Interface:</b>Provee funciones para acceder directamente al ORB core desde los clientes y desde las implementaciones de objetos
+          <p>Su interfaz no depende de la interfaz de los clientes ni de las interfaces de las implementaciones de objetos</p> </li>
+          <li class="listaDerecha"><b>Object Adapter:</b> Provee funciones para instanciar objetos, pasar requerimientos y manipular referencias de objetos
+          <p>Provee inter-operabilidad</p></li>
+            
+            
+        </section>
+      </div>
+
+      <div class="slide" id="Arq_Detalle3">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right">Detalle de la Arquitectura </header>
+        <section class="middle" data-build>
+          <li class="listaDerecha"><b>Repositorio de Interfaces (Interface Repository):</b> Provee persistencia de objetos
+            <p> Su información permite que un programa encuentre un objeto cuya interfaz no conoce en tiempo de compilación</p> </li>
+          <li class="listaDerecha"><b>Repositorio de Implementaciones (Implementation Repository):</b> Contiene información que permite al ORB core localizar y activar implementaciones de objetos</li>
+            
+            
+        </section>
+      </div>
+
+     <div class="slide transitionSlide" id="orb_server">
+          <section class="middle">
+            <h2>ORB (servidor)</h2>
+            <p>Skeleton, Dynamic Skeleton Interface, Object Adapter</p>
+          </section>
+      </div>    
+    
+    <div class="slide" id="Skeleton">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right">Skeleton </header>
+        <section class="middle" data-build>
+
+
+<li class="listaChica">Representa el elemento análogo al stub  del cliente.</li>
+<li class="listaChica">Se encarga de simular la petición remota como una petición local a la implementación real del objeto.</li>
+<li class="listaChica">Para el servidor todas las llamadas parecen locales.</li>
+<li class="listaChica">Generado a partir del IDL por un compilador IDL.</li>
+<li class="listaChica">Realiza el unmarshalling de las invocaciones del cliente.</li>
+<li class="listaChica">Proporcionan interfaces para el acceso estático a cada uno de los servicios proporcionados por el servidor.</li>
+            
+        </section>
+      </div>
+
+
+
+<div class="slide" id="DSI">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right">DSI (Dynamic Skeleton Interface)  </header>
+        <section class="middle" data-build>
+
+
+        <li class="listaChica">Es el equivalente al DII del lado del servidor.</li>
+        <li class="listaChica">Permite al servidor recibir la invocación en cualquier objeto, incluso en aquellos en donde no se conoce la interfaz IDL (en tiempo de ejecución).</li>
+        <li class="listaChica">El servidor no tiene que estar vinculado con el código skeleton.</li>    
+        </section>
+      </div>
+
+
+<div class="slide" id="boa">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right">Object Adapters  </header>
+        <section class="middle" data-build>
+
+
+        <li class="listaDerecha">Son las claves de la portabilidad y la flexibilidad en la implementación de los servidores.</li>
+        <li class="listaDerecha">Permite preparar los objetos a la recepción de las peticiones e informar al ORB cuando estas peticiones han sido ejecutadas.</li>
+           
+        </section>
+      </div>
+
+      <div class="slide" id="boa2">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right">Object Adapters (continuaci&oacute;n) </header>
+        <section class="middle" data-build>
+        <li class="listaDerecha">Las funciones que debe realizar el adaptador de objetos son:</li>
+        <li class="listaChica">Generación e interpretación de las referencias a objetos.</li>
+        <li class="listaChica">Invocación de métodos apropiados cuando llega una petición remota (upcall).</li>
+        <li class="listaChica">Seguridad en las interacciones.</li>
+        <li class="listaChica">Activación y desactivación de objetos e implementaciones.</li>
+        <li class="listaChica">Traducción de referencias a objetos a sus correspondientes implementaciones.</li>
+        <li class="listaChica">Registro objetos en el repositorio de implementaciones.</li>
+           
+        </section>
+      </div>
+
+      <div class="slide transitionSlide" id="mar_unmar">
+          <section class="middle">
+            <h2>Marshalling/ Unmarshalling</h2>
+            <p></p>
+          </section>
+      </div>    
+
+      <div class="slide" id="mar_gral">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right"> Marshaling / Unmarshaling </header>
+        <section class="middle" data-build>
+        <li class="listaDerecha">Acción de Marshalling: traducción de parámetros de entrada.</li>
+        <li class="listaDerecha">Acción de Unmarshalling: conversión de parámetros de la red.</li>
+        </section>
+      </div>
+
+      <div class="slide" id="marshaling">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right"> Marshaling </header>
+        <section class="middle" data-build>
+        <li class="listaDerecha">Conversión de formato en plataforma independiente.</li>
+           <div class="img_wrapper">
+              <img src="corba_img/marshaling.png" />
+            </div>
+        </section>
+      </div>
+
+      <div class="slide" id="unmarshaling">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right"> Unmarshaling </header>
+        <section class="middle" data-build>
+        <li class="listaDerecha">Conversión de formato de red en plataforma específica.</li>
+           <div class="img_wrapper">
+              <img src="corba_img/unmarshalling.png" />
+            </div>
+        </section>
+      </div>
+
+    
+<!--
+      
+      <div class="slide" id="espacio1">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .dominio{
+          font-size:30px;
+        }
+        </style>
+        <header class="title-right">Estructura de un dominio - Jerarquía</header>
+        <section  data-build>
+          <span class="dominio" style="float:right;padding-right:400px;">.</span>
+          <span class="dominio" style="float:right">ar</span>
+          <span class="dominio" style="float:right">edu.</span>
+          <span class="dominio" style="float:right">uai.</span>
+          <span style="clear:both"/>   
+          <img src="dns_img/dnsEsquema.png" width="800" height="500"/>                                 
+        </section>
+      </div>
+
+      <div class="slide" id="espacio2">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .dominio{
+          font-size:30px;
+        }
+        </style>
+        <header class="title-right">Tipos de registros</header>
+        <section>
+          <ul data-build>
+            <li class="listaDerecha"> A  ...................... Dirección IPv4</li>
+            <li class="listaDerecha"> CNAME  .................. Se usa para crear nombres de hosts adicionales, o alias, para los hosts de un dominio.</li>
+            <li class="listaDerecha"> MX  ..................... Define el lugar donde se aloja el correo que recibe el dominio.</li>
+            <li class="listaDerecha"> NS  ..................... Define la asociación que existe entre un nombre de dominio y los servidores de nombres que almacenan la información de dicho dominio</li>
+            <li class="listaDerecha"> PTR  .................... Puntero de IP</li>
+            <li class="listaDerecha"> SOA  .................... Registro de inicio de autoridad</li>
+            <li class="listaDerecha"> TXT  .................... La ubicación de un servidor. Su principal uso es para SPF.</li>
+          </ul>
+          <p class="footer">Lista completa: http://en.wikipedia.org/wiki/List_of_DNS_record_types</p>
+        </section>
+      </div>
+
+      <div class="slide" id="espacio3">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .dominio{
+          font-size:30px;
+        }
+        </style>
+        <header class="title-right">Ejemplo de zona</header>
+        <section data-build>
+
+        Encabezado
+        <pre>uai.edu.ar. IN  SOA dns1.uai.com.ar. hostmaster.uai.com.ar. (
+    2005060920 ; serial
+    3600 ; refresh
+    600 ; retry
+    1400000 ; expire
+    7200 ; default_ttl
+    )
+    </pre>
+    Registros
+    <li>uai.edu.ar. IN  NS    dns1.uai.com.ar.</li>
+    <li>uai.edu.ar. IN  NS    dns2.uai.com.ar.</li>
+    <li>uai.edu.ar. IN  MX  10  mx.uai.edu.ar.</li>
+    <li>uai.edu.ar. IN  MX  100  mx2.uai.edu.ar.</li>
+    <li>mx1.uai.edu.ar. IN  A  192.168.1.10</li>
+    <li>mx2.uai.edu.ar. IN  A  192.168.1.20</li>
+    <li>mx.uai.edu.ar. IN  CNAME  mx1.uai.edu.ar.</li>
+                    
+        </section>
+      </div>
+
+      -->
+      <div class="slide transitionSlide" id="preguntas">
+          <section class="middle">
+            <h2>Preguntas</h2>
+            <p></p>
+          </section>
+      </div>
+
+
+      <div class="slide" id="gracias">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+       .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+
+        .dominio{
+          font-size:30px;
+        }
+        .gracias{
+          
+          -webkit-animation: transform 1s infinite alternate;
+          -webkit-transform: rotate(0deg) scale(1);
+        }
+        </style>
+        
+        <section class="middle">
+          <h2 class="gracias">Gracias!</h2>
+                   
+        </section>
+      </div>
+
+
+      </div> <!-- slides -->
+      <div id="speaker-note" class="invisible" style="display: none;">
+      </div> <!-- speaker note -->
+      <aside id="help" class="sidebar invisible" style="display: hidden;">
+        <table>
+          <caption>Help</caption>
+          <tbody>
+            <tr>
+              <th>Move Around</th>
+              <td>&larr;&nbsp;&rarr;</td>
+            </tr>
+            <tr>
+              <th>Source File</th>
+              <td>s</td>
+            </tr>
+            <tr>
+              <th>Change Theme</th>
+              <td>t</td>
+            </tr>
+            <tr>
+              <th>Syntax Highlight</th>
+              <td>h</td>
+            </tr>
+            <tr>
+              <th>Speaker Notes</th>
+              <td>n</td>
+            </tr>
+            <tr>
+              <th>Toggle 3D</th>
+              <td>3</td>
+            </tr>
+            <tr>
+              <th>Help</th>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </aside>
+    </div> <!-- presentation -->
+
+    <!--[if lt IE 9]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">
+    </script>
+    <script>CFInstall.check({ mode: "overlay" });</script>
+    <![endif]-->
+
+    <script src="src/prettify/prettify.js" onload="prettyPrint();" defer></script>
+    <script src="js/utils_dns.js"></script>
+  
+ </body>
+</html>
