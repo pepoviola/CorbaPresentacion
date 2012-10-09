@@ -94,7 +94,7 @@
         </div>
 
         <div class="slide" id="group-people">
-          <header><img src="corba_img/logo-uai1.png" alt="UAI"></header>
+          <header><img src="dns_img/logo-uai1.png" alt="UAI"></header>
            <style>
             #group-people li {
               font-size: 32px;
@@ -105,9 +105,7 @@
               <li>Profesor: Santiago Sabato</li>
               <li>Materia: Modelos</li>
               <li>Alumnos:
-	      <ul>
-		  <li>Narcisi, Ruben</li>
-		  <li>Quevedo, Ariel</li>
+                 <ul>
                   <li>Decchi, Alejandro</li>
                   <li>Viola Villanueva, Javier</li>
                  </ul>
@@ -557,6 +555,93 @@
       </div>
 
     
+    <div class="slide transitionSlide" id="invoke">
+          <section class="middle">
+            <h2>Invocaci&oacute;n din&aacute;mica</h2>
+            <p> Paso a paso...</p>
+          </section>
+      </div>    
+
+    <div class="slide" id="invoke_gral">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right"> Invocaci&oacute;n din&aacute;mica </header>
+        <section class="middle" data-build>
+          
+        <li class="listaDerecha">El servidor no establece diferencia entre los dos tipos de invocaciones.</li>
+        <li class="listaDerecha">Construcción de invocación DII:</li>
+        <li class="listaChica">Identificar el objeto destinatario de petición</li>
+        <li class="listaChica">Recuperar su interfaz</li>
+        <li class="listaChica">Ejecutar la petición</li>
+        <li class="listaChica">Recibir resultados como las eventuales excepciones</li>
+
+        </section>
+      </div>
+
+
+      <div class="slide" id="invoke_pasos">
+        <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+         </style>
+        <header class="title-right"> Invocaci&oacute;n din&aacute;mica (Gr&aacute;fico) </header>
+        <section class="middle" data-build>
+        
+           <div class="img_wrapper">
+              <img src="corba_img/invoke_din.png" width="600px"/>
+            </div>
+        </section>
+      </div>
+
+      <div class="slide" id="invoke_beneficios">
+      <style>
+        .title-right{
+          font-size:25px;          
+        }
+        .listaDerecha{
+          text-align:left;
+          padding-left:65px;
+          font-size:20px;
+        }
+        .listaChica{
+          text-align:left;
+          padding-left:85px;
+          font-size:16px;
+        }
+        </style>
+        <header class="title-right"> Invocaci&oacute;n din&aacute;mica (beneficios )</header>
+        <section class="middle" data-build>
+          
+        <li class="listaDerecha">Adición de cambios al sistema sin hacer modificaciones en el cliente.</li>
+        <li class="listaDerecha">Da soporte en la búsqueda de servicios en "runtime".</li>
+        <li class="listaDerecha">Permite escribir código genérico.</li>
+        
+        </section>
+      </div>
 <!--
       
       <div class="slide" id="espacio1">
